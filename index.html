@@ -14,41 +14,7 @@
 </div>
 
 <script>
-  const ADMIN_CODE = "pantry123"; // Change this to your passcode
-
-  function applyAdminState() {
-    const isAdmin = sessionStorage.getItem("pantryAdminUnlocked") === "true";
-    document.body.classList.toggle("is-admin", isAdmin);
-    document.getElementById("role-status").textContent = isAdmin
-      ? "Mode: Admin (Editing Enabled)"
-      : "Mode: View Only";
-    document.getElementById("lock-btn").style.display = isAdmin ? "inline-block" : "none";
-  }
-
-  function unlockAdmin() {
-    const input = document.getElementById("admin-passcode");
-    if (input.value === ADMIN_CODE) {
-      sessionStorage.setItem("pantryAdminUnlocked", "true");
-      input.value = "";
-      applyAdminState();
-    } else {
-      alert("Incorrect passcode.");
-    }
-  }
-
-  function lockAdmin() {
-    sessionStorage.removeItem("pantryAdminUnlocked");
-    applyAdminState();
-  }
-
-  applyAdminState();
-</script>
-
-<style>
-  /* Hide add/edit/delete buttons unless .is-admin is on <body> */
-  body:not(.is-admin) .admin-only {
-    display: none !important;
-  }
+  
 </style>
   
     :root {
