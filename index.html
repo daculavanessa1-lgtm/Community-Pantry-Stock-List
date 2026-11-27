@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community Pantry Stock List</title>
   <style>
+    <!-- Place this gate right above your add/edit controls -->
+<div id="admin-gate">
+  <span id="role-status">Mode: View Only</span>
+  <input type="password" id="admin-passcode" placeholder="Enter admin passcode" />
+  <button type="button" onclick="unlockAdmin()">Unlock Admin</button>
+  <button type="button" id="lock-btn" onclick="lockAdmin()" style="display:none;">Lock</button>
+</div>
+
+<script>
+  const ADMIN_CODE = "pantry123"; // Change this to your passcode
+
+  function applyAdminState() {
+    const isAdmin = sessionStorage.getItem("pantryAdminUnlocked") === "true";
+    document.body.classList.toggle("is-admin", isAdmin);
+    document.getElementById("role-status").textContent = isAdmin
+      ? "Mode: Admin (Editing Enabled)"
+      : "Mode: View Only";
+    document.getElementById("lock-btn").style.display = isAdmin ? "inline-block" : "none";
+  }
+
+  function unlockAdmin() {
+    const input = document.getElementById("admin-passcode");
+    if (input.value === ADMIN_CODE) {
+      sessionStorage.setItem("pantryAdminUnlocked", "true");
+      input.value = "";
+      applyAdminState();
+    } else {
+      alert("Incorrect passcode.");
+    }
+  }
+
+  function lockAdmin() {
+    sessionStorage.removeItem("pantryAdminUnlocked");
+    applyAdminState();
+  }
+
+  applyAdminState();
+</script>
+
+<style>
+  /* Hide add/edit/delete buttons unless .is-admin is on <body> */
+  body:not(.is-admin) .admin-only {
+    display: none !important;
+  }
+</style>
+  
     :root {
       --bg: #f8fafc;
       --card: #ffffff;
