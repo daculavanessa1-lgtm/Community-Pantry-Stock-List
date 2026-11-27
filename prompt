@@ -1,0 +1,10 @@
+# Community Pantry Stock List — Prompt & Scope
+
+## Problem
+Neighborhood community pantries need a simple way for volunteers to check remaining stock and update quantities during distribution without losing paper tallies.
+
+## Core Feature (FR-01)
+- Add pantry stock items (name, category, quantity) to `localStorage`
+- Adjust item quantities with `-` and `+` (clamped at `0`) and delete items
+- View total units, low/out-of-stock counts (`<= 5`), and filter by category
+- Keep the build to one HTML file with no backend, logins, or database
